@@ -72,6 +72,7 @@ public class Profesor {
     public String getTituloAcademico() { return tituloAcademico; }
     public Instant getFechaRegistro() { return fechaRegistro; }
     public boolean isActivo() { return activo; }
+    public String getNombreCompleto() { return nombre + " " + apellido;}
 
     public void setDni(Dni dni) { this.dni = Objects.requireNonNull(dni, "DNI cannot be null"); }
     public void setEmail(Email email) { this.email = Objects.requireNonNull(email, "Email cannot be null"); }

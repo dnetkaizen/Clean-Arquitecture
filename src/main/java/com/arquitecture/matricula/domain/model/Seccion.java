@@ -100,6 +100,10 @@ public class Seccion {
         this.fechaInicio = inicio;
         this.fechaFin = fin;
     }
+    // Agregar este método para verificar cupos disponibles
+    public boolean tieneCuposDisponibles(int estudiantesInscritos) {
+        return estudiantesInscritos < capacidadMaxima;
+    }
 
     public void activate() { this.activo = true; }
     public void deactivate() { this.activo = false; }
