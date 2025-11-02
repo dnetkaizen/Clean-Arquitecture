@@ -142,7 +142,7 @@ public class SeccionApplicationService implements CreateSeccionUseCase, FindSecc
 
         return secciones.stream()
                 .filter(Seccion::isActivo)
-                .filter(seccion -> seccion.tieneCuposDisponibles(getEstudiantesInscritos(seccion))) // CORREGIDO
+                .filter(seccion -> getEstudiantesInscritos(seccion) < seccion.getCapacidadMaxima())
                 .filter(seccion -> query.getCursoId() == null || 
                          seccion.getCursoId().toString().equals(query.getCursoId()))
                 .filter(seccion -> query.getCapacidadMinima() == null || 
@@ -166,6 +166,11 @@ public class SeccionApplicationService implements CreateSeccionUseCase, FindSecc
 
         int estudiantesInscritos = getEstudiantesInscritos(seccion);
 
-        return seccionMapper.toResponse(seccion, curso.getNombre(), profesor.getNombreCompleto(), estudiantesInscritos);
+        return seccionMapper.toResponse(
+                seccion,
+                curso.getNombre(),
+                profesor.getNombre() + " " + profesor.getApellido(),
+                estudiantesInscritos
+        );
     }
 }

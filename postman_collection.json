@@ -1,0 +1,211 @@
+{
+  "info": {
+    "name": "Matricula API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_postman_id": "c8f5b4f2-3f57-4b3f-9c1a-aaaa11112222"
+  },
+  "item": [
+    {
+      "name": "Facultades",
+      "item": [
+        {
+          "name": "Crear Facultad",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/facultades",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "facultades"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Ingeniería\",\n  \"descripcion\": \"Facultad de Ingeniería\",\n  \"ubicacion\": \"Campus Norte\",\n  \"decano\": \"Dra. Pérez\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Carreras",
+      "item": [
+        {
+          "name": "Crear Carrera",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/carreras",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "carreras"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"facultadId\": \"<UUID_FACULTAD>\",\n  \"nombre\": \"Sistemas\",\n  \"descripcion\": \"Ingeniería de Sistemas\",\n  \"duracionSemestres\": 10,\n  \"tituloOtorgado\": \"Ing. de Sistemas\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Listar Carreras por Facultad",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/carreras/by-facultad?facultadId={{facultadId}}&activa=true",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "carreras", "by-facultad"],
+              "query": [
+                {"key": "facultadId", "value": "{{facultadId}}"},
+                {"key": "activa", "value": "true"}
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Cursos",
+      "item": [
+        {
+          "name": "Crear Curso",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/cursos",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "cursos"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"carreraId\": \"<UUID_CARRERA>\",\n  \"codigo\": \"CS101\",\n  \"nombre\": \"Algoritmos\",\n  \"descripcion\": \"Introducción a Algoritmos\",\n  \"creditos\": 4,\n  \"nivelSemestre\": 1\n}"
+            }
+          }
+        },
+        {
+          "name": "Listar Cursos por Carrera",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/cursos/by-carrera?carreraId={{carreraId}}&nivelSemestre=1&activo=true",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "cursos", "by-carrera"],
+              "query": [
+                {"key": "carreraId", "value": "{{carreraId}}"},
+                {"key": "nivelSemestre", "value": "1"},
+                {"key": "activo", "value": "true"}
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Profesores",
+      "item": [
+        {
+          "name": "Registrar Profesor",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/profesores",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "profesores"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Juan\",\n  \"apellido\": \"Gomez\",\n  \"dni\": \"12345678\",\n  \"email\": \"juan@uni.edu\",\n  \"telefono\": \"999999999\",\n  \"especialidad\": \"Algoritmos\",\n  \"tituloAcademico\": \"MSc\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Buscar Profesores",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/profesores?especialidad=Algoritmos&tituloAcademico=MSc&activo=true",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "profesores"],
+              "query": [
+                {"key": "especialidad", "value": "Algoritmos"},
+                {"key": "tituloAcademico", "value": "MSc"},
+                {"key": "activo", "value": "true"}
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Secciones",
+      "item": [
+        {
+          "name": "Crear Sección",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/secciones",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "secciones"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cursoId\": \"<UUID_CURSO>\",\n  \"profesorId\": \"<UUID_PROFESOR>\",\n  \"codigo\": \"A1\",\n  \"capacidadMaxima\": 30,\n  \"aula\": \"B-101\",\n  \"horario\": \"08:00-10:00\",\n  \"dias\": \"Lunes-Miercoles\",\n  \"periodoAcademico\": \"2025-1\",\n  \"fechaInicio\": \"2025-03-01\",\n  \"fechaFin\": \"2025-07-01\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Secciones por Curso",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/secciones/by-curso?cursoId={{cursoId}}&periodoAcademico=2025-1&profesorId={{profesorId}}&activa=true",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "secciones", "by-curso"],
+              "query": [
+                {"key": "cursoId", "value": "{{cursoId}}"},
+                {"key": "periodoAcademico", "value": "2025-1"},
+                {"key": "profesorId", "value": "{{profesorId}}"},
+                {"key": "activa", "value": "true"}
+              ]
+            }
+          }
+        },
+        {
+          "name": "Secciones disponibles",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/secciones/disponibles?periodoAcademico=2025-1&cursoId={{cursoId}}&capacidadMinima=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "secciones", "disponibles"],
+              "query": [
+                {"key": "periodoAcademico", "value": "2025-1"},
+                {"key": "cursoId", "value": "{{cursoId}}"},
+                {"key": "capacidadMinima", "value": "10"}
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8085" },
+    { "key": "facultadId", "value": "" },
+    { "key": "carreraId", "value": "" },
+    { "key": "cursoId", "value": "" },
+    { "key": "profesorId", "value": "" }
+  ]
+}
